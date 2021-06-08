@@ -1,12 +1,12 @@
-.c1{
-    margin-right: 15%;
-    margin-top: 5%;
-    float: right;
+.wrapper{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.c2{
-    margin-left: 15%;
-    margin-top: 5%;
-    float: left;
+.item{
+    flex : 0 0 calc(50% - 10rem)
 }
-
