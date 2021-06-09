@@ -1,4 +1,67 @@
 <div class="wrapper" >
-  <app-login class="item"></app-login>
-  <app-register class="item"></app-register>
+  <!-- <app-login class="item"></app-login>
+  <app-register class="item"></app-register> -->
+
+<div >
+   <!-- {{registerForm.value.enterRegisterName}} -->
+  <form  id="form-register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h3>Register</h3>
+    <div class="mb-3">
+      <label for="name" class="form-label" >Enter Name</label>
+      <input type="text" class="form-control" formControlName="enterRegisterName" id="name"  aria-describedby="emailHelp"
+      [ngClass]="{ 'is-invalid': submitted && fregister.enterRegisterName.errors }">
+      <div *ngIf="submitted && fregister.enterRegisterName.errors" class="error-field"> 
+        <div *ngIf="fregister.enterRegisterName.errors.required">First Name is required</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label" >Enter Email address</label>
+      <input type="email" class="form-control" formControlName="enterRegisterEmail" id="email"  aria-describedby="emailHelp"
+      [ngClass]="{ 'is-invalid': submitted && fregister.enterRegisterEmail.errors }">
+      <div *ngIf="submitted && fregister.enterRegisterEmail.errors" class="error-field">
+        <div *ngIf="fregister.enterRegisterEmail.errors.required">Email is required</div></div>
+        <div *ngIf="fregister.enterRegisterEmail.errors.email">Email must be a valid email address</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Enter Password</label>
+      <input type="password" class="form-control" formControlName="enterRegisterPass" id="password" 
+      [ngClass]="{ 'is-invalid': submitted && fregister.enterRegisterPass.errors }">
+      <div *ngIf="submitted && fregister.enterRegisterPass.errors" class="error-field">
+        <div *ngIf="fregister.enterRegisterPass.errors.required">Password is required</div></div>
+        <div *ngIf="fregister.enterRegisterPass.errors.minlength">Password must be at least 4 characters</div>
+    </div>
+    <div class="mb-3">
+      <label for="Password" class="form-label">Confirm Password</label>
+      <input type="Password" class="form-control" formControlName="enterRegisterConfirmPass" id="password" 
+      [ngClass]="{ 'is-invalid': submitted && fregister.enterRegisterConfirmPass.errors }">
+      <div *ngIf="submitted && fregister.enterRegisterConfirmPass.errors" class="error-field">
+        <div *ngIf="fregister.enterRegisterConfirmPass.errors.required">Password is required</div></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<div>
+  <form  id="form-login" [formGroup]="loginForm" (ngSubmit)="onloginSubmit()" >
+    <h3>Login</h3>
+    <div class="mb-3">
+      <label for="email" class="form-label" >Email address</label>
+      <input type="email" class="form-control" formControlName="enterLoginEmail" id="email-login"  aria-describedby="emailHelp"
+      [ngClass]="{ 'is-invalid': submitted && flogin.enterLoginEmail.errors }">
+      <div *ngIf="submitted && flogin.enterLoginEmail.errors" class="error-field">
+        <div *ngIf="flogin.enterLoginEmail.errors.required">Email is required</div></div>
+        <div *ngIf="flogin.enterLoginEmail.errors.email">Email must be a valid email address</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" formControlName="enterLoginPass" id="password-login"
+      [ngClass]="{ 'is-invalid': submitted && flogin.enterLoginPass.errors }">
+      <div *ngIf="submitted && flogin.enterLoginPass.errors" class="error-field">
+        <div *ngIf="flogin.enterLoginPass.errors.required">Password is required</div></div>
+        <div *ngIf="flogin.enterLoginPass.errors.minlength">Password must be at least 4 characters</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
 </div>

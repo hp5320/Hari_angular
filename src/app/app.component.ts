@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,56 +8,154 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
 
-  ngOnInit(): void {
-    let user: object;
-    let userArray: Array<any> = [];
-    let counter : number = 0;
-    let form = document.getElementById('form-register') as HTMLFormElement;
+    registerForm: any;
+    submitted:boolean = false;
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let email = document.getElementById('email') as HTMLInputElement;
-      let password = document.getElementById('password') as HTMLInputElement;
-      let name = document.getElementById('name') as HTMLInputElement;
-      user = {
-        name: name.value,
-        email: email.value,
-        password: password.value,
-      };
-      userArray.push(user);
-      console.log(userArray);
+    loginForm: any;
+    loginSubmitted:boolean = false;
+
+    user: any;
+    userArray: Array<any> = [];
+
+    constructor(private formBuilder: FormBuilder) { }
+
+    ngOnInit(): void { 
+      this.registerForm=this.formBuilder.group({
+
+      enterRegisterName: ['',Validators.required],
+      enterRegisterEmail: ['',[Validators.required, Validators.email]],
+      enterRegisterPass:['',[Validators.required,Validators.minLength(4)]],
+      enterRegisterConfirmPass:['',Validators.required]
+
     });
+    this.loginForm=this.formBuilder.group({
 
-
-    let formLogin = document.getElementById('form-login') as HTMLFormElement;
-
-    formLogin.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let email = document.getElementById('email-login') as HTMLInputElement;
-      let password = document.getElementById(
-        'password-login'
-      ) as HTMLInputElement;
-
-      userArray.forEach((element,idx) =>{
-        if(element.email === email.value){
-          if (element.password === password.value) {
-               counter += 1 
-               alert("logged in")
-              
-              
-          }
-          else{
-            alert("wrong password")
-            return;
-          }
-        }
-
-        if(idx === userArray.length-1 && counter === 0){
-            alert('invalid credentials');
-        }
-
-      })
-      
-    });
+      enterLoginEmail: ['',[Validators.required, Validators.email]],
+      enterLoginPass:['',[Validators.required,Validators.minLength(4)]]});   
+       
   }
+
+  // convenience getter for easy access to form fields
+  get fregister() { return this.registerForm.controls; }
+  get flogin() { return this.loginForm.controls; }
+
+  onSubmit() {
+      // this.submitted = true;
+
+      // // stop here if form is invalid
+      // if (this.registerForm.invalid) {
+      //     return;
+      // }
+
+      // alert('SUCCESS!! :-)\n\n')
+
+      this.submitted = true;
+
+    let email = this.registerForm.controls.enterRegisterEmail.value;
+    let password = this.registerForm.controls.enterRegisterPass.value;
+    let name = this.registerForm.controls.enterRegisterName.value;
+    this.user = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    this.userArray.push(this.user);
+    console.log(this.userArray);
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value));
+  }
+
+  onloginSubmit(){
+    console.log("hp");
+    
+    // this.LoginSubmitted = true;
+    //   if(this.loginForm.invalid){
+    //     return;
+    //   }
+    //   alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.loginForm.value))
+    this.loginSubmitted = true;
+    let counter = 0;
+    // stop here if form is invalid
+    let email = this.loginForm.controls.enterLoginEmail.value;
+    let password = this.loginForm.controls.enterLoginPass.value;
+    console.log(password);
+    this.userArray.forEach((element, idx) => {
+      if (element.email === email) {
+        if (element.password == password) {
+          counter += 1;
+          alert('logged in');
+        } else {
+          alert('wrong password');
+          return;
+        }
+      }
+
+      if (idx === this.userArray.length - 1 && counter === 0) {
+        alert('invalid credentials');
+      }
+    });
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+  }
+
+ 
+
+
+    // let user: object;
+    // let userArray: Array<any> = [];
+    // let counter : number = 0;
+    // let form = document.getElementById('form-register') as HTMLFormElement;
+
+    // form.addEventListener('submit', (e) => {
+    //   e.preventDefault();
+    //   let email = document.getElementById('email') as HTMLInputElement;
+    //   let password = document.getElementById('password') as HTMLInputElement;
+    //   let name = document.getElementById('name') as HTMLInputElement;
+    //   user = {
+    //     name: name.value,
+    //     email: email.value,
+    //     password: password.value,
+    //   };
+    //   userArray.push(user);
+    //   console.log(userArray);
+    // });
+
+
+    // let formLogin = document.getElementById('form-login') as HTMLFormElement;
+
+    // formLogin.addEventListener('submit', (e) => {
+    //   e.preventDefault();
+    //   let email = document.getElementById('email-login') as HTMLInputElement;
+    //   let password = document.getElementById(
+    //     'password-login'
+    //   ) as HTMLInputElement;
+
+    //   userArray.forEach((element,idx) =>{
+    //     if(element.email === email.value){
+    //       if (element.password === password.value) {
+    //            counter += 1 
+    //            alert("logged in")
+              
+              
+    //       }
+    //       else{
+    //         alert("wrong password")
+    //         return;
+    //       }
+    //     }
+
+    //     if(idx === userArray.length-1 && counter === 0){
+    //         alert('invalid credentials');
+    //     }
+
+    //   })
+      
+    // });
 }
