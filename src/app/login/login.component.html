@@ -1,15 +1,23 @@
-<!-- <form class="login-form" id="form-login">
+
+  <form  id="form-login" [formGroup]="loginForm" (ngSubmit)="onloginSubmit()" >
     <h3>Login</h3>
     <div class="mb-3">
       <label for="email" class="form-label" >Email address</label>
-      <input type="email" class="form-control" id="email-login"  aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      <input type="email" class="form-control" formControlName="enterLoginEmail" id="email-login"  aria-describedby="emailHelp"
+      [ngClass]="{ 'is-invalid': loginSubmitted && flogin.enterLoginEmail.errors }">
+      <div *ngIf="loginSubmitted && flogin.enterLoginEmail.errors" class="error-field">
+        <div *ngIf="flogin.enterLoginEmail.errors.required">Email is required</div></div>
+        <div *ngIf="flogin.enterLoginEmail.errors.email">Email must be a valid email address</div>
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password-login">
+      <input type="password" class="form-control" formControlName="enterLoginPass" id="password-login"
+      [ngClass]="{ 'is-invalid': loginSubmitted && flogin.enterLoginPass.errors }">
+      <div *ngIf="loginSubmitted && flogin.enterLoginPass.errors" class="error-field">
+        <div *ngIf="flogin.enterLoginPass.errors.required">Password is required</div></div>
+        <div *ngIf="flogin.enterLoginPass.errors.minlength">Password must be at least 4 characters</div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-  </form> -->
-  
-<h1>This is login</h1>
+  </form>
+
+

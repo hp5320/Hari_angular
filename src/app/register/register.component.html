@@ -1,21 +1,36 @@
-<!-- <form class="login-form" id="form-register">
-    <h3>Register</h3>
-    <div class="mb-3">
-      <label for="name" class="form-label" >Enter Name</label>
-      <input type="text" class="form-control" id="name"  aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label" >Enter Email address</label>
-      <input type="email" class="form-control" id="email"  aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Enter Password</label>
-      <input type="password" class="form-control" id="password">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form> -->
-
-  <h1>This is Register</h1>
+<form  id="form-register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+   <h3>Register</h3>
+   <div class="mb-3">
+     <label for="name" class="form-label" >Enter Name</label>
+     <input type="text" class="form-control" formControlName="enterRegisterName" id="name"  aria-describedby="emailHelp"
+     [ngClass]="{ 'is-invalid': submitted && fregister.enterRegisterName.errors }">
+     <div *ngIf="submitted && fregister.enterRegisterName.errors" class="error-field"> 
+       <div *ngIf="fregister.enterRegisterName.errors.required">First Name is required</div>
+     </div>
+   </div>
+   <div class="mb-3">
+     <label for="email" class="form-label" >Enter Email address</label>
+     <input type="email" class="form-control" formControlName="enterRegisterEmail" id="email"  aria-describedby="emailHelp"
+     [ngClass]="{ 'is-invalid': submitted && fregister.enterRegisterEmail.errors }">
+     <div *ngIf="submitted && fregister.enterRegisterEmail.errors" class="error-field">
+       <div *ngIf="fregister.enterRegisterEmail.errors.required">Email is required</div></div>
+       <div *ngIf="fregister.enterRegisterEmail.errors.email">Email must be a valid email address</div>
+   </div>
+   <div class="mb-3">
+     <label for="password" class="form-label">Enter Password</label>
+     <input type="password" class="form-control" formControlName="enterRegisterPass" id="password" 
+     [ngClass]="{ 'is-invalid': submitted && fregister.enterRegisterPass.errors }">
+     <div *ngIf="submitted && fregister.enterRegisterPass.errors" class="error-field">
+       <div *ngIf="fregister.enterRegisterPass.errors.required">Password is required</div></div>
+       <div *ngIf="fregister.enterRegisterPass.errors.minlength">Password must be at least 4 characters</div>
+   </div>
+   <div class="mb-3">
+     <label for="Password" class="form-label">Confirm Password</label>
+     <input type="Password" class="form-control" formControlName="enterRegisterConfirmPass" id="password" 
+     [ngClass]="{ 'is-invalid': submitted && fregister.enterRegisterConfirmPass.errors }">
+     <div *ngIf="submitted && fregister.enterRegisterConfirmPass.errors" class="error-field">
+       <div *ngIf="fregister.enterRegisterConfirmPass.errors.required">Password is required</div></div>
+   </div>
+   <button type="submit" class="btn btn-primary">Submit</button>
+ </form>
   

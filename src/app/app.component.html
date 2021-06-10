@@ -1,10 +1,10 @@
-<div class="wrapper" >
+<!-- <div class="wrapper" >
   <!-- <app-login class="item"></app-login>
   <app-register class="item"></app-register> -->
 
-<div >
+<!--<div >
    <!-- {{registerForm.value.enterRegisterName}} -->
-  <form  id="form-register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <!--<form  id="form-register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <h3>Register</h3>
     <div class="mb-3">
       <label for="name" class="form-label" >Enter Name</label>
@@ -64,4 +64,111 @@
   </form>
 </div>
 
+</div> -->
+
+
+<!-- 
+   *************************************  sai code   ***********************************************  
+  <div class="wrapper">
+  <div class="item">
+    <form
+      class="login-form"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmitLogin()"
+      id="form-login"
+    >
+      <h3>Login</h3>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email-login"
+          aria-describedby="emailHelp"
+          formControlName="loginEmail"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+        />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+        <div *ngIf="loginSubmitted && fl.loginEmail.errors" >
+            <div *ngIf="fl.loginEmail.errors.required">Email is required</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" formControlName="loginPassword" class="form-control" id="password-login" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        <div *ngIf="loginSubmitted && fl.loginPassword.errors" >
+            <div *ngIf="fl.loginPassword.errors.required">Password is required</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="item">
+    <form class="login-form" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()" id="form-register">
+      <h3>Register</h3>
+      <div class="mb-3">
+        <label for="name" class="form-label">Enter Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          aria-describedby="emailHelp"
+          formControlName="name"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+        />
+        <div *ngIf="registerSubmitted && fg.name.errors">
+            <div *ngIf="fg.name.errors.required"> Name is required </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Enter Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          aria-describedby="emailHelp"
+          formControlName="email"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+        />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+        <div *ngIf="registerSubmitted && fg.email.errors" >
+            <div *ngIf="fg.email.errors.required">Email is required</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Enter Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+        <div *ngIf="registerSubmitted && fg.password.errors" >
+            <div *ngIf="fg.password.errors.required">password is required</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Re-Enter Password</label>
+        <input type="password" class="form-control" id="password"  formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+        <div  *ngIf="registerSubmitted && fg.confirmPassword.errors" >
+            <div *ngIf="fg.confirmPassword.errors.required" >password is required</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+-->
+
+<div class="wrapper">
+<div>
+  <a routerLink= "login">login-form</a>
+</div>
+<div>
+  <router-outlet></router-outlet>
+</div>
+<div>
+  <a routerLink= "registration">registration-form</a>
+</div>
 </div>
